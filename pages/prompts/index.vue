@@ -1,11 +1,7 @@
 <template>
-    <div>
-        <div class="grid grid-cols-4 gap-5">
-            <div v-for="p in prompts">
-                <PromptCard :prompt="p"/>
-            </div>
-        </div>
-    </div>
+        <section class="max-w-[1420px] mx-auto">
+            <PromptList/>
+        </section>
 </template>
 
 <script setup>
@@ -13,10 +9,13 @@
         layout: 'prompts'
     })
 
-    //fetch prompts
-    const { data: prompts } = await useFetch('https://fakestoreapi.com/products')
+    useHead({
+        title: 'PromptPilot | List',
+    })
 </script>
 
 <style lang="scss" scoped>
-
+    .card-wrapper{
+        
+    }
 </style>

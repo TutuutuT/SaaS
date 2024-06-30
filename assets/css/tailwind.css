@@ -3,14 +3,36 @@
 @tailwind utilities;
 
 body {
-    @apply m-0 p-0 bg-gray-50;
+    @apply m-0 p-0 bg-[#121212] text-white;
+}
+
+:root {
+    --grid-item-margin: 15px;
+}
+
+@media (max-width: 1200px) {
+    :root {
+        --grid-item-margin: 15px;
+    }
 }
 
 @layer components {
-    .btn {
-        @apply px-4 py-2 border rounded-md;
-    }
     .card {
-        @apply p-3 bg-white rounded-md shadow-md h-full;
+        @apply rounded-3xl border-white/40 hover:scale-[98%];
+        width: calc((100%/5) - (30px));
+        margin: var(--grid-item-margin);
+        font-size: 16px;
+        font-weight: 500;
+        background-position: center;
+        background-size: cover;
+        transition-duration: 0.2s;
+        aspect-ratio: 230/300;
+        display: flex;
+        align-items: flex-end;
+        line-height: 130%;
+
+        &--category {
+            width: 100%;
+        }
     }
 }
