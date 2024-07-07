@@ -1,7 +1,8 @@
 <template>
-  <div>
-    <h2>Home</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque enim sint quasi veniam laborum assumenda tempora mollitia molestiae quaerat ipsa.</p>
+  <div class="w-full">
+    <h1 class=" mx-auto">PromptPilot</h1>
+    
+    <p>Home dashboard</p>
   </div>
 </template>
 
@@ -10,11 +11,13 @@
 </script>
 
 <style scoped>
-    h2 {
+    h1 {
         margin-bottom: 20px;
-        font-size: 36px;
+        font-size: 165px;
+        font-weight: bold;
+        width: fit-content;
     }
     p {
         margin: 20px 0;
     }
-</style>
+</style> 

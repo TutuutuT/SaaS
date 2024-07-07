@@ -23,7 +23,7 @@
     }
 
     definePageMeta({
-        layout: 'prompts'
+        layout: 'default'
     })
 
     const {data} = await useFetch('/api/prompts')
