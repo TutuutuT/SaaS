@@ -1,36 +1,89 @@
 <template>
     <div class="w-full h-[100svh] flex justify-center items-center flex-col">
-        <div class="absolute z-0 w-full flex justify-center">
-            <div class="flex justify-center absolute -top-60">
-                <svg width="416" height="416" viewBox="0 0 416 416" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="208" cy="208" r="207.5" stroke="#292929"/>
-                </svg>
-            </div>
-            <div class="flex justify-center absolute -top-60 animation-360">
-                <svg width="416" height="417" viewBox="0 0 416 417" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M257.538 6.74445C228.997 0.774981 196.214 -1.84672 152.549 8.25491" stroke="url(#paint0_linear_8_7)" stroke-linecap="round"/>
-                <defs>
-                <linearGradient id="paint0_linear_8_7" x1="257.495" y1="3.74478" x2="152.505" y2="5.25521" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#146EF5" stop-opacity="0"/>
-                <stop offset="0.5" stop-color="#146EF5"/>
-                <stop offset="1" stop-color="#146EF5" stop-opacity="0"/>
-                </linearGradient>
-                </defs>
-                </svg>
-            </div>
+        <div class="absolute z-0 w-full justify-center grid grid-cols-1 grid-rows-1">
+            <canvas id="roundCanvas" class="w-full h-full grid-span-1 "/>
+            <div class="w-full h-full bg-gradient-to-t from-[#7F5EFF] to-[#997FFF] grid-span-1"/>
         </div>
       <h1 class="z-10">PromptPilot</h1>
       <button class="OneButton">Découvrir PrompPilot</button>
     </div>
+    <section>
+        <div>weshezaekzapke</div>
+    </section>
   </template>
   
   <script setup>
   
   definePageMeta({
-          layout: 'home'
+          layout: 'landingPage'
       })
   
   </script>
+
+<script>
+export default {
+  mounted() {
+    const myCanvas = document.getElementById("roundCanvas");
+    const originalHeight = myCanvas.height;
+    const originalWidth = myCanvas.width;
+render();
+    function render() {
+    const dimensions = getObjectFitSize(
+        true,
+        myCanvas.clientWidth,
+        myCanvas.clientHeight,
+        myCanvas.width,
+        myCanvas.height
+    );
+    myCanvas.width = dimensions.width;
+    myCanvas.height = dimensions.height;
+
+    const ctx = myCanvas.getContext("2d");
+    const ratio = Math.min(
+        myCanvas.clientWidth / originalWidth,
+        myCanvas.clientHeight / originalHeight
+    );
+    ctx.scale(ratio, ratio); //adjust this!
+    ctx.beginPath();
+    ctx.arc(150, 65, 30, 0, 2 * Math.PI);
+    ctx.arc(150, 65, 100, 0, 2 * Math.PI);
+    ctx.arc(150, 65, 65, 0, 2 * Math.PI);
+    ctx.stroke();
+    }
+
+    // adapted from: https://www.npmjs.com/package/intrinsic-scale
+    function getObjectFitSize(
+    contains /* true = contain, false = cover */,
+    containerWidth,
+    containerHeight,
+    width,
+    height
+    ) {
+    const doRatio = width / height;
+    const cRatio = containerWidth / containerHeight;
+    let targetWidth = 0;
+    let targetHeight = 0;
+    const test = contains ? doRatio > cRatio : doRatio < cRatio;
+
+    if (test) {
+        targetWidth = containerWidth;
+        targetHeight = targetWidth / doRatio;
+    } else {
+        targetHeight = containerHeight;
+        targetWidth = targetHeight * doRatio;
+    }
+
+    return {
+        width: targetWidth,
+        height: targetHeight,
+        x: (containerWidth - targetWidth) / 2,
+        y: (containerHeight - targetHeight) / 2
+    };
+    }
+    }
+}
+
+</script>
   
   <style scoped>
       h1 {
